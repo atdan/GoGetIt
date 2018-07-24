@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/background3"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+  >
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:id="@+id/textLogo"
+            android:gravity="center"
+            android:textSize="80sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get It"
+            android:textColor="#ffffff"/>
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="200dp"-->
+            <!--/>-->
+        <TextView
+            android:id="@+id/textSlogan"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="App Slogan"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <info.hoang8f.widget.FButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/btn_signUp"
+            android:textColor="@android:color/white"
+            android:background="@color/btnSignUp"
+            android:shadowColor="@android:color/black"
+            app:buttonColor="@color/btnSignUp"
+
+            android:text="Sign Up"
+
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content" />
+        <info.hoang8f.widget.FButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/btn_signIn"
+            android:textColor="@android:color/white"
+            app:buttonColor="@color/btnSignActive"
+            android:shadowColor="@android:color/black"
+            android:text="Sign In"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>
