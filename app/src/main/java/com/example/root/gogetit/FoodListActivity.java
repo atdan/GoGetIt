@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.root.gogetit.Interface.ItemClickListener;
+import com.example.root.gogetit.common.Common;
+import com.example.root.gogetit.database.Database;
 import com.example.root.gogetit.model.Food;
 import com.example.root.gogetit.viewHolder.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -45,6 +47,11 @@ public class FoodListActivity extends AppCompatActivity {
     MaterialSearchBar materialSearchBar;
 
 
+    //add favourites
+    Database localDb;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +66,23 @@ public class FoodListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         food_recycler_view.setLayoutManager(layoutManager);
 
+        //local database
+        localDb = new Database(this);
+
+
         //get posn
         if (getIntent() != null){
             categoryId = getIntent().getStringExtra("CategoryId");
 
         }
         if (!categoryId.isEmpty() && categoryId!= null){
-            loadListFood(categoryId);
+
+            if (Common.isConnectedToInternet(this)){
+                loadListFood(categoryId);
+            }else
+                Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                return;
+
         }
         //Search
         materialSearchBar = findViewById(R.id.searchBar);
@@ -82,6 +99,7 @@ public class FoodListActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                //when user types a text we will change the suggest list
                 List<String> suggest = new ArrayList<>();
                 for (String search: suggestList){
                     if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase())){
@@ -181,11 +199,33 @@ public class FoodListActivity extends AppCompatActivity {
                 food_list.orderByChild("MenuId").equalTo(categoryId) //Like select * from Food where MenuId = category Id
         ) {
             @Override
-            protected void populateViewHolder(FoodViewHolder viewHolder, Food model, int position) {
+            protected void populateViewHolder(final FoodViewHolder viewHolder, final Food model, final int position) {
 
                 viewHolder.food_name.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.food_image);
+
+                //add favourites
+                if (localDb.isFvourite(adapter.getRef(position).getKey())){
+                    viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+                }
+                //click to change state of favourites
+                viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!localDb.isFvourite(adapter.getRef(position).getKey())){
+                            localDb.addToFvourites(adapter.getRef(position).getKey());
+                            viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+                            Toast.makeText(FoodListActivity.this, ""+model.getName()+" was added to Favourites", Toast.LENGTH_SHORT).show();
+                        }else {
+                            localDb.remveFromFvourites(adapter.getRef(position).getKey());
+                            viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                            Toast.makeText(FoodListActivity.this, ""+model.getName()+" was removed from Favourites", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
 
                 final Food local = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {

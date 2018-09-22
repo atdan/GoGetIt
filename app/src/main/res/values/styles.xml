@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -28,4 +28,21 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <!--Rating Dialog-->
+
+    <style name="RatingDialogueStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/RatingDialogueButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/RatingDialogueButtonStyle</item>
+    </style>
+
+    <style name="RatingDialogueButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="RatingDialogueFadeAnim">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
 </resources>

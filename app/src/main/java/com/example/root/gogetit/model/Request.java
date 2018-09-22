@@ -7,6 +7,7 @@ public class Request {
     private String address;
     private String name;
     private String total;
+    private String comment;
     private List<Order> foods; // list of food orders
 
     private String status;
@@ -14,13 +15,22 @@ public class Request {
     public Request() {
     }
 
-    public Request(String phone, String address, String name, String total, List<Order> foods) {
+    public Request(String phone, String address, String name, String total, String comment, List<Order> foods, String status) {
         this.phone = phone;
         this.address = address;
         this.name = name;
         this.total = total;
+        this.comment = comment;
         this.foods = foods;
-        this.status = "0"; // ) is the default status  0:placed, 1: shipping, 2: shipped
+        this.status = status;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getStatus() {

@@ -13,6 +13,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.example.root.gogetit.common.Common.convertCodeToStatus;
+
    public class OrderStatusActivity extends AppCompatActivity {
 
     public RecyclerView recyclerView;
@@ -37,7 +39,10 @@ import com.google.firebase.database.FirebaseDatabase;
         recyclerView.setLayoutManager(layoutManager);
 
 
-        loadOrders(Common.current_user.getPhone());
+        if (getIntent() == null)
+            loadOrders(Common.current_user.getPhone());
+        else
+            loadOrders(getIntent().getStringExtra("userPhone"));
     }
 
        private void loadOrders(String phone) {
@@ -62,11 +67,5 @@ import com.google.firebase.database.FirebaseDatabase;
            recyclerView.setAdapter(adapter);
        }
 
-       private String convertCodeToStatus(String status) {
-           if (status.equals("0")){
-               return "Order Placed";
-           }else if (status.equals("1")){
-               return "On my way!";
-           }else return "shipped";
-       }
+
    }

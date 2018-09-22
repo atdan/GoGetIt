@@ -39,6 +39,10 @@ dependencies {
     //firebase ui
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
 
+    //firebase messaging
+    implementation 'com.google.firebase:firebase-messaging:17.3.1'
+
+
 
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
@@ -52,6 +56,20 @@ dependencies {
 
 
     implementation 'com.github.mancj:MaterialSearchBar:0.7.1'
+
+    //add key value pair to android memory
+    implementation 'io.paperdb:paperdb:2.1'
+
+    //checkbox
+    implementation 'com.github.rey5137:material:1.2.4'
+
+    //rating
+    implementation 'com.stepstone.apprating:app-rating:2.0.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

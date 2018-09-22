@@ -53,8 +53,36 @@
 
         </com.rengwuxian.materialedittext.MaterialEditText>
 
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rey.material.widget.CheckBox
+                android:layout_weight="1"
+                android:id="@+id/ckbRememberMe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                style="@style/Material.Drawable.CheckBox"
+                android:text="Remember Me"
+                android:textColor="@android:color/white"
+                app:cbd_strokeColor="@android:color/white"
+                app:cbd_tickColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"
+                android:text="@string/forgot_password"
+                android:id="@+id/txtForgotPassword"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
+
 
     <info.hoang8f.widget.FButton
         android:layout_width="match_parent"

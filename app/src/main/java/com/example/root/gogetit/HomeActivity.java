@@ -3,7 +3,6 @@ package com.example.root.gogetit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,11 +20,15 @@ import android.widget.Toast;
 import com.example.root.gogetit.Interface.ItemClickListener;
 import com.example.root.gogetit.common.Common;
 import com.example.root.gogetit.model.Category;
+import com.example.root.gogetit.model.Token;
 import com.example.root.gogetit.viewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
+
+import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,7 +91,25 @@ public class HomeActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerView_menu.setLayoutManager(layoutManager);
 
-        loadMenu();
+        Paper.init(this);
+
+        if (Common.isConnectedToInternet(this)){
+            loadMenu();
+        }else
+            Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+
+        // update token for messaging on startup
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+//
+    }
+
+    private void updateToken(String token) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokensReference =  db.getReference("Tokens");
+
+        Token data = new Token(token,false); //false because this token is from client
+
+        tokensReference.child(Common.current_user.getPhone()).setValue(data);
     }
 
     private void loadMenu() {
@@ -144,6 +165,9 @@ public class HomeActivity extends AppCompatActivity
 //            return true;
 //        }
 
+        if (item.getItemId() == R.id.refresh)
+            loadMenu();
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -168,6 +192,12 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_view) {
 
         } else if (id == R.id.nav_log_out) {
+
+            //delete remembered password and user
+            Paper.book().destroy();
+
+
+            //logout
             Intent signInIntent = new Intent(HomeActivity.this, MainActivity.class);
             signInIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signInIntent);
