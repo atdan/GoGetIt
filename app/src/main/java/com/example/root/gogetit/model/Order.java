@@ -1,27 +1,56 @@
 package com.example.root.gogetit.model;
 
 public class Order {
+    private int ID;
     private String ProductId;
     private String ProductName;
     private String Quantity;
     private String Price;
     private String Discount;
+    private String image;
 
     public Order(){
 
     }
 
-    public Order(String productId, String productName, String quantity, String price, String discount) {
+    public Order(String productId, String productName, String quantity, String price, String discount, String image) {
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
         Discount = discount;
+        this.image = image;
+    }
+
+    public Order(int ID, String productId, String productName, String quantity, String price, String discount, String image) {
+        this.ID = ID;
+        ProductId = productId;
+        ProductName = productName;
+        Quantity = quantity;
+        Price = price;
+        Discount = discount;
+        this.image = image;
     }
 
     public String getProductId() {
 
         return ProductId;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public void setProductId(String productId) {

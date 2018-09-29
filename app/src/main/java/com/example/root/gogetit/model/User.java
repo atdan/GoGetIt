@@ -6,6 +6,7 @@ public class User {
     private String Password;
     private String Phone, IsStaff;
     private String secureCode;
+    private String HomeAddress;
 
 
     public User(){
@@ -59,5 +60,13 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    public String getHomeAddress() {
+        return HomeAddress;
+    }
+
+    public void setHomeAddress(String homeAddress) {
+        HomeAddress = homeAddress;
     }
 }

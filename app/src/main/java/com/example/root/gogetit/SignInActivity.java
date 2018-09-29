@@ -84,7 +84,7 @@ public class SignInActivity extends AppCompatActivity {
                     final ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this);
                     progressDialog.setMessage("Please Wait...");
                     progressDialog.show();
-                    table_user.addValueEventListener(new ValueEventListener() {
+                    table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -104,6 +104,8 @@ public class SignInActivity extends AppCompatActivity {
                                         Common.current_user = user;
                                         startActivity(homeIntent);
                                         finish();
+
+                                        table_user.removeEventListener(this);
                                     }
 
 

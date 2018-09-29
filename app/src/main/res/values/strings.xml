@@ -9,4 +9,8 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
 
+    <string name="facebook_app_id">296257530966868</string>
+    <string name="facebook_login_protocol_name">fb296257530966868</string>
+    <string name="food_price">Food price</string>
+
 </resources>

@@ -11,27 +11,19 @@
 
 
         <LinearLayout
-            android:padding="8dp "
+            android:padding="8dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/edtAddress"
-                android:hint="Address"
-                android:padding="2dp"
+
+
+            <fragment
+                android:id="@+id/place_autocomplete_fragmet"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/colorPrimary"
-                android:text=""
-                android:textColor="@color/colorPrimary"
-                android:textSize="30sp"
-                android:inputType="text"
-                app:met_baseColor="@color/colorPrimary"
-                app:met_floatingLabel="highlight"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"/>
+                android:layout_height="wrap_content"/>
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edtComment"
                 android:hint="Comment"
@@ -48,6 +40,22 @@
                 app:met_primaryColor="@color/colorPrimary"
                 app:met_singleLineEllipsis="true"/>
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:text="Ship to this Address"
+                    android:id="@+id/radioShipToAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:text="Home Address"
+                    android:id="@+id/radioHomeAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
         </LinearLayout>
 
 

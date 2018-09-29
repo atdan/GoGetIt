@@ -12,8 +12,8 @@ import com.example.root.gogetit.R;
 public class FoodViewHolder extends RecyclerView.ViewHolder
                 implements View.OnClickListener{
 
-    public TextView food_name;
-    public ImageView food_image, fav_image;
+    public TextView food_name, food_price;
+    public ImageView food_image, fav_image, shareToFb;
     private ItemClickListener itemClickListener;
 
 
@@ -23,6 +23,8 @@ public class FoodViewHolder extends RecyclerView.ViewHolder
         food_name = itemView.findViewById(R.id.food_name);
         food_image = itemView.findViewById(R.id.food_image);
         fav_image = itemView.findViewById(R.id.fav);
+        shareToFb = itemView.findViewById(R.id.share_to_fb);
+        food_price = itemView.findViewById(R.id.food_price);
 
         itemView.setOnClickListener(this);
     }
